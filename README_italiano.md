@@ -9,6 +9,8 @@ Per questa Challenge il team Advanced Analytics di Generali Italia mette a dispo
 
 L’accuratezza delle previsioni verrà valutata utilizzando l’F1 Score, cioè la media armonica di precisione e recupero (precision e recall) per la categoria target=1 (Churn):
 
+La classifica finale sarà invece determinata dal F1 Score ottenuto sul restante 75% del test set.\
+Per questa Challenge il team Advanced Analytics di Generali Italia mette a disposizione un dataset, debitamente anonimizzato, che raccoglie una serie di informazioni sui clienti che hanno sottoscritto una polizza auto.
 
 
 
