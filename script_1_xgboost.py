@@ -1,43 +1,11 @@
-from datetime import datetime
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import sklearn
 import seaborn as sns
 import xgboost as xgb
-import imblearn
-import lightgbm as lgb
-
 import optuna
 from sklearn.model_selection import train_test_split
-from sklearn.cluster import KMeans
-from sklearn.ensemble import AdaBoostClassifier, StackingClassifier, RandomForestClassifier
-from sklearn.neighbors import KNeighborsClassifier #'knn', 'decision-tree', 'random-forest', 'adaboost', 'gradient-boosting', 'linear-svm']
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, normalize
-from sklearn.decomposition import SparsePCA,PCA,TruncatedSVD, KernelPCA
-from sklearn.model_selection import RandomizedSearchCV, RepeatedStratifiedKFold
 from sklearn.metrics import f1_score, classification_report
-from imblearn.over_sampling import SMOTE, BorderlineSMOTE,SVMSMOTE,ADASYN
-from imblearn.combine import SMOTEENN,SMOTETomek
-from imblearn.pipeline import Pipeline
-from imblearn.under_sampling import RandomUnderSampler, RepeatedEditedNearestNeighbours, TomekLinks,\
-    CondensedNearestNeighbour, InstanceHardnessThreshold
-import random
-from numpy.random import MT19937
-from numpy.random import RandomState, SeedSequence
-from optuna.samplers import RandomSampler
-np.random.seed(10)
-
-def timer(start_time=None):
-    if not start_time:
-        start_time = datetime.now()
-        return start_time
-    elif start_time:
-        thour, temp_sec = divmod((datetime.now() - start_time).total_seconds(), 3600)
-        tmin, tsec = divmod(temp_sec, 60)
-        print('\n Time taken: %i hours %i minutes and %s seconds.' % (thour, tmin, round(tsec, 2)))
-
 
 test_set = pd.read_csv('/home/davide/Desktop/dati gara generali/test_set.csv', low_memory=False, index_col=False)
 train_set = pd.read_csv('/home/davide/Desktop/dati gara generali/train_set.csv', low_memory=False, index_col=False)
@@ -150,10 +118,6 @@ print('# Columns with numeric values (test set): ' + str(numeric_var_test.__len_
       ,'\n# Columns with non-numeric values (test set): ' + str(cat_var_test.__len__()) +
       '\nwhich features: ' + str(cat_var_test))
 
-"SCALING DATA?"
-'''It's unnecessary since the base learners are trees, and any monotonic function of any feature variable will have
-no effect on how the trees are formed.'''
-
 #how many columns have NANs again.Drop columns with Nan > 4000
 nan_dataframe = pd.DataFrame([X_train_raw.isnull().sum(),X_test.isnull().sum()],index=['train','test'])
 uniquenanscol = nan_dataframe[nan_dataframe >= 4000].any()
@@ -162,7 +126,6 @@ X_train_raw.drop(columns=Truesnan,axis=1,inplace=True)
 X_test.drop(columns=Truesnan,axis=1,inplace=True)
 
 def objective(trial):
-    np.random.seed(10)
     train_x, valid_x, train_y, valid_y = train_test_split(X_train_raw,y_train_raw, test_size=0.25,random_state=10)
     dtrain = xgb.DMatrix(train_x, label=train_y)
     dvalid = xgb.DMatrix(valid_x, label=valid_y)
