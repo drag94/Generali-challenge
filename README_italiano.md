@@ -1,4 +1,4 @@
-# Generali-challenge 2020
+# Generali Data challenge 2020
 
 Il mancato rinnovo di una polizza da parte di un cliente (Customer Churn) è un problema classico per una compagnia assicurativa. Un problema a cui vanno incontro tutti i modelli di business basati su contratti a scadenza.
 La previsione del Customer Churn è il tema di questa Challenge.
