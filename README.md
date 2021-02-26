@@ -1,5 +1,7 @@
 # Generali Data challenge 2020
 
+[Description of the model](https://github.com/drag94/Generali-challenge/blob/main/description_english.pdf)
+
 A customer who fail to renew the policy (Customer Churn) is a classic problem for an insurance company. A problem that all business models based on expiring contracts face.\
 Customer Churn prediction is the theme of this Challenge.\
 A vital issue: anticipating it allows for example to leverage retention actions to maintain the relationship with the customer.\
